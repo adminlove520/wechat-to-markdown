@@ -24,7 +24,8 @@ export async function GET(request: Request) {
     });
     
     // Determine the content type
-    const contentType = response.headers['content-type'] || 'image/jpeg';
+    const rawContentType = response.headers['content-type'];
+    const contentType = typeof rawContentType === 'string' ? rawContentType : 'image/jpeg';
     
     // Return the image with appropriate headers
     return new NextResponse(response.data, {
